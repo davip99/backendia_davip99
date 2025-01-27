@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Cargar el modelo y el tokenizador
+
 model_name = "gpt2-large"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name).to(device)
@@ -24,15 +24,15 @@ def model_pipeline(prompt: str, max_length: int = 128, temperature: float = 0.5,
     
     encoding = tokenizer(prompt, return_tensors="pt", padding=True, truncation=True, max_length=max_length)
     input_ids = encoding["input_ids"].to(device)
-    attention_mask = encoding["attention_mask"].to(device)  # Attention mask
+    attention_mask = encoding["attention_mask"].to(device)  
     
-    # Establecer pad_token_id, si es necesario
-    model.config.pad_token_id = tokenizer.pad_token_id  # Usar el pad_token definido
+    
+    model.config.pad_token_id = tokenizer.pad_token_id  
     
     with torch.no_grad():
         output = model.generate(
             input_ids,
-            attention_mask=attention_mask,  # Pasar el attention_mask
+            attention_mask=attention_mask,  
             max_length=max_length,
             num_beams=5,
             do_sample=True,
@@ -41,6 +41,6 @@ def model_pipeline(prompt: str, max_length: int = 128, temperature: float = 0.5,
             temperature=temperature
         )
     
-    # Decodificar el texto generado
+    
     generated_text = tokenizer.decode(output[0], skip_special_tokens=True).strip()
     return generated_text
