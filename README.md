@@ -31,4 +31,4 @@ API_TOKEN=mi_token_secreto
 
 9. Escribir un prompt usando el siguiente comando: `curl -X 'POST' \'http://localhost:8000/generate' \-H 'accept: application/json' \ -H 'token: mi_token_secreto' \ -H 'Content-Type: application/x-www-form-urlencoded' \ -d 'prompt=once%20upon%20a%20time&max_length=128&temperature=0.6&top_p=1'`
 
-[Documentacion de la API]()
+[Documentacion de la API](https://documenter.getpostman.com/view/41258294/2sAYQiAnFS)
